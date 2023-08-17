@@ -18,26 +18,19 @@ const MessageList = () => {
   const { conversations, currentChat, profileInfo } = useSelector(
     (state) => state.chat
   );
-  // const users = useSelector((state) => state.chat.users);
-  // const {updatedMessageList,setUpdatedMessages}= useState(messages)
-  // let currentChat=1
-  console.log("conversations", currentChat);
 
   const chat = conversations.filter((conv) => conv.chatId === currentChat?.id);
   const sortedMessages = useMemo(() => {
     const messageList = chat[0]?.conversation?.sort(
       (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
     );
-    // console.log("messageList", messageList);
     return messageList;
   }, [chat]);
 
   let insertedUnreadMessagesInfo = false;
-console.log('chat.length',chat)
   let messageListItems = chat.length ? (
     sortedMessages?.map((message) => {
       let insert = false;
-      // console.log(insertedUnreadMessagesInfo);
       if (!insertedUnreadMessagesInfo && !message.read) {
         insertedUnreadMessagesInfo = true;
         insert = true;

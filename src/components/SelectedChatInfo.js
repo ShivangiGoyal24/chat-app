@@ -4,7 +4,6 @@ import { archiveChat } from "../actions/chatActions";
 export default function SelectedChatInfo() {
   const dispatch = useDispatch();
   const currentChat = useSelector((state) => state.chat.currentChat);
-  console.log("currentChat......", currentChat);
 
   const handleArchiveChat = () => {
     dispatch(archiveChat());
@@ -16,7 +15,6 @@ export default function SelectedChatInfo() {
     let archiveIcon = require("../imgAssets/archive_icon.png");
     const { name, lastName, email_id } = currentChat;
     const getNameInitials = () => {
-      console.log("name.....", name);
       let initials =
         name?.charAt(0)?.toUpperCase() + lastName?.charAt(0)?.toUpperCase();
       return initials;

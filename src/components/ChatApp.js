@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 const ChatApp = () => {
   const currentChat = useSelector((state) => state.chat.currentChat);
   let chatNotSelected = currentChat === null;
-  console.log("chatNotSelected", chatNotSelected);
   return (
     <div className="chat-app">
       <div className="panel-1">

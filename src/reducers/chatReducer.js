@@ -248,7 +248,6 @@ const chatReducer = (state = initialState, action) => {
           chat.conversation?.push(action.payload);
         }
       });
-      console.log("updatedConv", updatedConv);
 
       return {
         ...state,
@@ -292,7 +291,6 @@ const chatReducer = (state = initialState, action) => {
         let chat = state.currentChat
         chat.active=false
         let userList =state.users.filter((user)=>user.id!==chat.id)
-        console.log()
         return {
           ...state,
           users: [...userList, chat ],
