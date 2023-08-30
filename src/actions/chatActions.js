@@ -25,6 +25,7 @@ export const markMessagesRead = () => {
 };
 
 export const toggleStatus = () => {
+
     return {
         type: 'TOGGLE_STATUS',
     };

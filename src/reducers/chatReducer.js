@@ -8,13 +8,17 @@ const sampleMessages = [
         id: 1,
         text: "Hello there!",
         read: true,
+        attachments: [
+          // { id: "file1", name: "document.pdf", url: "/uploads/document.pdf" },
+        ],
         timestamp: "2023-08-12T10:30:00",
       },
       {
         msg_id: 2,
         id: 12, // id 12 is taken as id of the user
-        text: "Hello Dan!",
+        text: "Hello Alan!",
         read: true,
+        attachments: [],
         timestamp: "2023-08-12T10:30:01",
       },
       {
@@ -22,6 +26,7 @@ const sampleMessages = [
         id: 1,
         text: "How are you?",
         read: true,
+        attachments: [],
         timestamp: "2023-08-12T10:30:02",
       },
       {
@@ -29,6 +34,7 @@ const sampleMessages = [
         id: 12,
         text: "I am fine",
         read: true,
+        attachments: [],
         timestamp: "2023-08-12T10:30:03",
       },
     ],
@@ -42,13 +48,15 @@ const sampleMessages = [
         id: 2,
         text: "Hello there!",
         read: true,
+        attachments: [],
         timestamp: "2023-08-12T10:30:00",
       },
       {
         msg_id: 2,
         id: 12,
-        text: "Hello Tia!",
+        text: "Hello Evan!",
         read: true,
+        attachments: [],
         timestamp: "2023-08-12T10:30:01",
       },
       {
@@ -56,6 +64,7 @@ const sampleMessages = [
         id: 2,
         text: "How are you?",
         read: true,
+        attachments: [],
         timestamp: "2023-08-12T10:30:02",
       },
       {
@@ -63,6 +72,7 @@ const sampleMessages = [
         id: 12,
         text: "I am fine",
         read: true,
+        attachments: [],
         timestamp: "2023-08-12T10:30:03",
       },
     ],
@@ -74,8 +84,9 @@ const sampleMessages = [
       {
         msg_id: 1,
         id: 12,
-        text: "Hello Sam!",
+        text: "Hello Jane!",
         read: true,
+        attachments: [],
         timestamp: "2023-08-12T10:30:00",
       },
       {
@@ -83,6 +94,7 @@ const sampleMessages = [
         id: 3,
         text: "Hello Shivangi!",
         read: true,
+        attachments: [],
         timestamp: "2023-08-12T10:30:01",
       },
       {
@@ -131,60 +143,73 @@ const sampleMessages = [
     conversation: [],
   },
 ];
-
+//used active to identify the archived and unarchived chats
+// used status to identify the online users
 const users = [
   {
     id: 1,
-    name: "Dan",
+    name: "Alan",
     lastName: "",
     avatar: "user1.png",
     active: true,
-    email_id: "Dan@gmail.com",
+    status: true,
+    profileLink: "https://www.quickchat.com/alan",
+    email_id: "Alan@gmail.com",
     unreadMessages: 0,
   },
   {
     id: 2,
-    name: "Tia",
+    name: "Evan",
     lastName: "",
     avatar: "user2.png",
     active: true,
-    email_id: "Tia@gmail.com",
+    status: true,
+    profileLink: "https://www.quickchat.com/evan",
+    email_id: "Evan@gmail.com",
     unreadMessages: 0,
   },
   {
     id: 3,
-    name: "Sam",
+    name: "Jane",
     lastName: "",
     avatar: "user3.png",
     active: true,
-    email_id: "Sam@gmail.com",
+    status: true,
+    profileLink: "https://www.quickchat.com/jane",
+    email_id: "Jane@gmail.com",
     unreadMessages: 2,
   },
   {
     id: 4,
-    name: "Jenny",
+    name: "Anna",
     lastName: "",
     avatar: "user4.png",
     active: true,
-    email_id: "Jenny@gmail.com",
+    status: true,
+    profileLink: "https://www.quickchat.com/anna",
+    email_id: "Anna@gmail.com",
     unreadMessages: 0,
   },
   {
     id: 5,
-    name: "Jacob",
+    name: "Mark",
     lastName: "",
     avatar: "user5.png",
     active: true,
-    email_id: "Jacob@gmail.com",
+    status: true,
+    profileLink: "https://www.quickchat.com/mark",
+    email_id: "Mark@gmail.com",
     unreadMessages: 0,
   },
   {
     id: 6,
-    name: "Smith",
+    name: "Ahan",
     lastName: "",
     avatar: "user6.png",
     active: false,
-    email_id: "Smith@gmail.com",
+    status: true,
+    profileLink: "https://www.quickchat.com/ahan",
+    email_id: "Ahan@gmail.com",
     unreadMessages: 0,
   },
   {
@@ -193,34 +218,42 @@ const users = [
     lastName: "",
     avatar: "user7.png",
     active: false,
+    status: true,
+    profileLink: "https://www.quickchat.com/lily",
     email_id: "Lily@gmail.com",
     unreadMessages: 0,
   },
   {
     id: 8,
-    name: "Galin",
+    name: "Brad",
     lastName: "",
     avatar: "user8.png",
     active: true,
-    email_id: "Galin@gmail.com",
+    status: true,
+    profileLink: "https://www.quickchat.com/brad",
+    email_id: "Brad@gmail.com",
     unreadMessages: 0,
   },
   {
     id: 9,
-    name: "Ria",
+    name: "Rita",
     lastName: "",
     avatar: "user9.png",
     active: true,
-    email_id: "Ria@gmail.com",
+    status: true,
+    profileLink: "https://www.quickchat.com/rita",
+    email_id: "Rita@gmail.com",
     unreadMessages: 0,
   },
   {
     id: 10,
-    name: "Ben",
+    name: "Kyle",
     lastName: "",
     avatar: "user10.png",
     active: false,
-    email_id: "Ben@gmail.com",
+    status: true,
+    profileLink: "https://www.quickchat.com/kyle",
+    email_id: "Kyle@gmail.com",
     unreadMessages: 0,
   },
 ];
@@ -233,7 +266,7 @@ const initialState = {
     lastName: "",
     avatar: "user12.png",
     designation: "Lead UI/UX Designer",
-    active: false,
+    status: false,
   },
   conversations: sampleMessages,
   users,
@@ -267,14 +300,14 @@ const chatReducer = (state = initialState, action) => {
         (chat) => chat.id === action.payload
       );
       conversation.forEach((message) => (message.read = true));
-      let updatedSampleMessages = state.conversations.filter(
+      let updatedJanepleMessages = state.conversations.filter(
         (chat) => chat.id !== action.payload
       );
       return {
         ...state,
         users: [...updatedUsersList],
         currentChat: user,
-        conversations: [...updatedSampleMessages, conversation],
+        conversations: [...updatedJanepleMessages, conversation],
       };
     case "GO_TO_LIST":
       return {
@@ -282,19 +315,19 @@ const chatReducer = (state = initialState, action) => {
         currentChat: null,
       };
     case "TOGGLE_STATUS":
-      let status = state.profileInfo.active;
+      let status = state.profileInfo.status;
       return {
         ...state,
-        profileInfo: { ...state.profileInfo, active: !status },
+        profileInfo: { ...state.profileInfo, status: !status },
       };
-      case "ARCHIVE_CHAT":
-        let chat = state.currentChat
-        chat.active=false
-        let userList =state.users.filter((user)=>user.id!==chat.id)
-        return {
-          ...state,
-          users: [...userList, chat ],
-        };
+    case "ARCHIVE_CHAT":
+      let chat = state.currentChat;
+      chat.active = !chat.active;
+      let userList = state.users.filter((user) => user.id !== chat.id);
+      return {
+        ...state,
+        users: [...userList, chat],
+      };
     default:
       return state;
   }

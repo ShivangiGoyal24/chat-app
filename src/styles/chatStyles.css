@@ -1,3 +1,5 @@
+/* Import Font Awesome CSS */
+@import "~font-awesome/css/font-awesome.css";
 /* Reset some default styles */
 * {
   margin: 0;
@@ -38,10 +40,6 @@
 }
 /* Message list container */
 .message-list {
-  /* flex: 15;
-  overflow-y: auto;
-  padding: 10px 0;
-  margin: 10px; */
   background-color: #f1eeee;
   flex: 15 1;
   overflow-y: auto;
@@ -50,12 +48,15 @@
   display: flex;
   flex-direction: column;
   justify-content: end;
+  border-radius: 1em;
 }
 .panel-2 {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  flex: 6 1;
   margin: 10px;
+  min-width: 216px;
 }
 /* Individual message */
 
@@ -92,13 +93,14 @@
   display: flex;
   align-items: center;
   margin-bottom: 5px;
+  position: relative;
 }
 
 .avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 
 .user-info {
@@ -113,6 +115,7 @@
 }
 .username {
   font-weight: bold;
+  padding: 8px;
 }
 
 .user-active {
@@ -122,7 +125,11 @@
 }
 .chat-list {
   font-size: 1.5em;
-  padding-left: 0.5em;
+  padding-left: 0.2em;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .active-user-list,
 .archived-user-list {
@@ -198,11 +205,15 @@
     flex-direction: row;
   }
   .back-button {
-    visibility: hidden;
+    display: none;
+  }
+  .chatUserName {
+    display: none;
   }
   .panel-2 .hide {
     display: none;
   }
+ 
 }
 @media (max-width: 768px) {
   .chat-app {
@@ -211,15 +222,21 @@
   .back-button {
     visibility: visible;
   }
-
+  .messageListHeader {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to bottom right, #ebe6e0, #91b2d7);
+  }
   .back-button {
-    background: rgb(0, 128, 128);
+    background: linear-gradient(to bottom right, #ebe6e0, #718091);
     color: white;
     font-size: 1em;
     line-height: 1;
     padding: 0.5em;
     text-decoration: none;
     transition: all 0.2s;
+    border-radius: 11px;
+    width: 1.5em;
   }
 
   .back-button:hover {
@@ -235,6 +252,10 @@
   }
 
   .panel-2 .hide {
+    display: none;
+  }
+
+  .profile .hide {
     display: none;
   }
 }
@@ -293,8 +314,80 @@
   height: 1em;
 }
 .profile-name {
+  position: relative;
   font-size: larger;
+  background-color: #f9f3f3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5em;
+  justify-content: center;
 }
+.profile-settings-logo {
+  height: 1.1em;
+  width: 1.1em;
+  margin: 0.2em;
+}
+/* profile settings menu */
+/* ProfileSettingsButton.css */
+
+/* Style for the button */
+.profile-settings-button button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* ProfileSettingsButton.css */
+
+/* Style for the button */
+.profile-settings-button button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px; /* Add a slight border-radius for a modern look */
+}
+
+/* Style for the menu */
+.profile-settings-menu {
+  position: absolute;
+  top: 38px;
+  right: 20px;
+  left: -64px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 100;
+  border-radius: 3px;
+}
+
+.profile-settings-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-settings-menu li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: #f9f3f3;
+}
+
+.profile-settings-menu li:hover {
+  background-color: #d3cbcb; /* Highlight on hover */
+}
+
+/* Show the menu when it's open */
+.profile-settings-button:hover .profile-settings-menu {
+  display: block;
+}
+
 .profile-designation {
   font-size: small;
   margin: 2px;
@@ -344,9 +437,96 @@
   padding: 4px;
   background-color: white;
   color: blue;
+  width: 98px;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
 }
 .list-arrow {
-  height: 0.5em;
-  width: 0.7em;
+  height: 0.3em;
+  width: 0.5em;
+}
+/*styles for the green dot */
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px; /* Adjust spacing as needed */
+}
+.app-user {
+  .dot.green {
+    background-color: #08f108;
+    position: absolute;
+    right: -8px;
+    top: 28px;
+  }
+  .dot.grey {
+    background-color: #bdb9b9;
+    position: absolute;
+    right: -8px;
+    top: 28px;
+  }
+}
+.app-chat {
+  .dot.green {
+    background-color: #08f108;
+    position: absolute;
+    left: 28px;
+    top: 28px;
+  }
+  .dot.grey {
+    background-color: #bdb9b9;
+    position: absolute;
+    left: 28px;
+    top: 28px;
+  }
+}
+.chatUserName {
   margin-left: 1em;
+  color: #05057a;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+.copy-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f3f3;
+}
+.copy-link-button {
+  cursor: pointer;
+    user-select: all;
+    padding: 5px;
+    background-color: #007bff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: white;
+}
+.panel3-item {
+  margin-bottom: 1em;
+    border-radius: 1em;
+}
+.emoji-logo {
+  height: 1.5em;
+    width: 1.5em;
+    margin: 0.2em;
+}
+.emoji-picker-container {
+  position: relative;
+}
+.emoji-picker-box {
+  position: absolute;
+    right: 1em;
+    bottom: 2em;
+}
+/* CSS for the FileUpload component and icon */
+.file-upload {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.attachment-icon {
+  font-size: 24px;
+  margin-right: 8px;
 }

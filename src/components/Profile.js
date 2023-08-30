@@ -1,23 +1,28 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleStatus } from "../actions/chatActions";
-export default function Profile() {
-  const dispatch = useDispatch();
-  const { id, name, avatar, active, designation } = useSelector(
+import { useSelector } from "react-redux";
+// import { toggleStatus } from "../actions/chatActions";
+import ProfileSettingsButton from "./ProfileSettingsButton";
+export default function Profile({handleStatusToggle}) {
+  // const dispatch = useDispatch();
+  const { name, avatar, status, designation } = useSelector(
     (state) => state.chat.profileInfo
   );
-  const handleStatusToggle = () => {
-    dispatch(toggleStatus());
-  };
+  const {currentChat } = useSelector((state) => state.chat);
+  // const handleStatusToggle = () => {
+  //   dispatch(toggleStatus());
+  // };
   let imageName = require(`../imgAssets/${avatar}`);
-  let activeStatusImage = active
+  let activeStatusImage = status
     ? require("../imgAssets/chatOn.png")
     : require("../imgAssets/chatOff.png");
-
+ 
   return (
-    <div className="profile">
+    <div className={`profile ${currentChat ? "hide" : "show"}`}>
       <img className="profile-avatar" src={imageName} alt={name} />
-      <span className="profile-name">{name}</span>
+      <span className="profile-name">{name}
+      
+      <ProfileSettingsButton/>
+      </span>
       <span className="profile-designation">{designation}</span>
       <img
         className="profile-active"

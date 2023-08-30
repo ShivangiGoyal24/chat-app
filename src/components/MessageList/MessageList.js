@@ -3,22 +3,23 @@ import { useSelector, useDispatch } from "react-redux";
 import Message from "./Message";
 import { goToChatList } from "../../actions/chatActions";
 import ChatInput from "../ChatInput";
-const BackButton = () => {
+const BackButton = (props) => {
   const dispatch = useDispatch();
   const handleBackButtonClick = () => {
     dispatch(goToChatList());
   };
   return (
-    <a className="back-button" href="#" onClick={handleBackButtonClick}>
-      &lt;&nbsp;BACK
-    </a>
+    <span className="messageListHeader"><a className="back-button" href="#" onClick={handleBackButtonClick}>
+    &lt;&nbsp;
+  </a>
+  <h4 className="chatUserName">{props.name}</h4>
+  </span>
   );
 };
 const MessageList = () => {
   const { conversations, currentChat, profileInfo } = useSelector(
     (state) => state.chat
   );
-
   const chat = conversations.filter((conv) => conv.chatId === currentChat?.id);
   const sortedMessages = useMemo(() => {
     const messageList = chat[0]?.conversation?.sort(
@@ -55,7 +56,7 @@ const MessageList = () => {
   );
   return (
     <div className={`message-list ${currentChat ? "show" : "hide"}`}>
-      <BackButton />
+      <BackButton name={currentChat?.name} />
       {messageListItems}
       <ChatInput></ChatInput>
     </div>
